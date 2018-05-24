@@ -11,7 +11,8 @@ blockchained-mobility-hack](Get-Invite.png)](http://bit.ly/BMH-github-invite)
 
 ## Step 2: Check Your Email
 
-Click on the confirmation link to confirm membership.
+**Click on the confirmation link to confirm membership.**
+
 ![Click on the confirmation link to confirm membership.](Confirm-Invite.png)
 
 ## Step 3: Check out the Wiki
