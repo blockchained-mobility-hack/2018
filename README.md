@@ -9,6 +9,8 @@ Click [here](http://bit.ly/BMH-github-invite "Click here and enter your github I
 [![Get GitHub Invite To
 blockchained-mobility-hack](Get-Invite.png)](http://bit.ly/BMH-github-invite)
 
-## Step 2: Check out the Wiki
+## Step 2: Confirm 
+
+## Step 3: Check out the Wiki
 
 ![Navigate to Wiki](Navigate_to_Wiki.png)
