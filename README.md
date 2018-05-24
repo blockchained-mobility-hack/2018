@@ -6,6 +6,8 @@ This is the central repository for all technical materials you'll need to get or
 
 [Get GitHub Invite](http://bit.ly/BMH-github-invite "Click here and enter your github ID")
 
+![Get GitHub Invite To
+blockchained-mobility-hack](Get-Invite.png)
 
 ## Step 2: Check out the Wiki
 
