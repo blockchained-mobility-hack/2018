@@ -17,4 +17,4 @@ blockchained-mobility-hack](Get-Invite.png)](http://bit.ly/BMH-github-invite)
 
 ## Step 3: Check out the Wiki
 
-![Navigate to Wiki](Navigate_to_Wiki.png)
+[![Navigate to Wiki](Navigate_to_Wiki.png)](https://github.com/blockchained-mobility-hack/2018/wiki)
