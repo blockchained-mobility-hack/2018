@@ -1,0 +1,337 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "api.tyntec.com",
+  "schemes": ["https"],
+  "security": [
+    {
+      "APIKeyHeader": []
+    }
+  ],
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "guts-messaging-service",
+      "description": "Guts Messaging Service"
+    }
+  ],
+  "securityDefinitions": {
+    "APIKeyHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "apiKey"
+    }
+  },
+  "paths": {
+    "/messaging/v1/messages/{requestId}": {
+      "get": {
+        "tags": [
+          "guts-messaging-service"
+        ],
+        "summary": "getMessageInfo",
+        "operationId": "getMessageInfoUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "requestId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestMessageResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/messaging/v1/sms": {
+      "post": {
+        "tags": [
+          "guts-messaging-service"
+        ],
+        "summary": "Sends SMS",
+        "operationId": "sendSmsUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Destination number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Originator number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "description": "Message to be sent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "encoding",
+            "type": "string",
+            "description": "One of AUTO/GSM7/UNICODE",
+            "default": "AUTO",
+            "required": false
+          },
+          {
+            "name": "gateway",
+            "in": "query",
+            "description": "Which gateway to use for the delivery of the message",
+            "required": false,
+            "type": "string",
+            "default": "DEFAULT"
+          },
+          {
+            "name": "conversion",
+            "in": "query",
+            "description": "Is this message subject to conversion ratio",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "sendDateTime",
+            "in": "query",
+            "description": "Any future date in the format “yyyy-MM-ddT-HH:mm:ss+HH:mm” (according to ISO 8601)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "validity",
+            "in": "query",
+            "description": "Validity in minutes for this message",
+            "required": false,
+            "type": "string",
+            "default": "2880"
+          },
+          {
+            "name": "reference",
+            "in": "query",
+            "description": "A custom reference that will mark the Dlrs",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "callBackUrl",
+            "in": "query",
+            "description": "Your URL for delivering the DLRs. Leave empty for no DLR",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "partLimit",
+            "in": "query",
+            "description": "Up to how many parts you allow this message to be concatenated",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "trate",
+            "in": "query",
+            "description": "Up to how much you allow the transocder to replace original characters to make it GSM7 compatible. Possible decimal values from 0 to 1.",
+            "required": false,
+            "type": "number",
+            "default": 1,
+            "format": "double"
+          },
+          {
+            "name": "mrate",
+            "in": "query",
+            "description": "Up to how much you allow the transocder to skip original characters to make it GSM7 compatible. Possible decimal values from 0 to 1.",
+            "required": false,
+            "type": "number",
+            "default": 0,
+            "format": "double"
+          },
+          {
+            "name": "upperCased",
+            "in": "query",
+            "description": "If you allow the transocder to try an uppercased version of the content in case this improves the produced parts of the message",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "flash",
+            "in": "query",
+            "description": "If this sms will be delivered as flash. Some networks do not support his.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The messageIds of your request",
+            "schema": {
+              "$ref": "#/definitions/RestMessageResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/RestMessageResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Something went wrong :-(",
+            "schema": {
+              "$ref": "#/definitions/RestMessageResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestMessagePart": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "doneDate": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "msgId": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "priceEffective": {
+          "type": "string"
+        },
+        "sentDate": {
+          "type": "string"
+        },
+        "statusText": {
+          "type": "string"
+        }
+      }
+    },
+    "RestMessageResponse": {
+      "type": "object",
+      "properties": {
+        "doneDate": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorReason": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "mccmnc": {
+          "type": "string"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestMessagePart"
+          }
+        },
+        "priceEffective": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "sentDate": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string"
+        },
+        "submitDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string"
+        },
+        "ttid": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
